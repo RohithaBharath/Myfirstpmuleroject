@@ -1,0 +1,47 @@
+#%RAML 1.0
+title: MY movie orders
+types:
+  var1: !include /Movies-list/dataType.raml
+/Movies:
+  get:
+    queryParameters:
+      Keyword:
+        description: This is the query param which my reuest is accepted
+        type: string
+        required: true
+        minLength: 3
+        maxLength: 10
+    responses:
+      200:
+        body:
+          application/json:
+            type: var1[]
+            examples:
+              output: !include /Movies-list/movies-ids.raml
+  post:
+      body:
+        application/json:
+          type: var1[]
+          examples:
+            input: !include /Movies-list/newmovie-ids.raml
+      responses:
+        200:
+          body:
+            application/json:
+              examples:
+                "message": "List updated successfully"
+  /{ID}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: var1[]
+              examples:
+                output: !include /Movies-list/newmovie-ids.raml
+      
+          
+
+          
+                                                                    
+          
